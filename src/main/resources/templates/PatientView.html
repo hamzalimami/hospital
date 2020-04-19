@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header"> listes des patients</div>
+        <div class="card-body">
+
+            <form method="get" th:action="@{patients}">
+                <div class="form-group">
+                    <label>name :</label>
+                    <input type="text" name="keyword">
+                    <button type="submit" class="btn btn-success">chercher</button>
+                </div>
+            </form>
+
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>datenaissance</th>
+                    <th>malade</th>
+                    <th>score</th>
+                </tr>
+                <tr th:each="p:${listpatients}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.name}"></td>
+                    <td th:text="${p.datenaissance}"></td>
+                    <td th:text="${p.malade}"></td>
+                    <td th:text="${p.score}"></td>
+                </tr>
+            </table>
+            <ul class="nav nav-pills">
+                <li th:each="page,status:${pages}">
+                    <a th:class="${status.index==currentpage ?'btn btn-primary': 'btn'}"
+                       th:href="@{patients(page=${status.index})}" th:text="${status.index}"></a>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
